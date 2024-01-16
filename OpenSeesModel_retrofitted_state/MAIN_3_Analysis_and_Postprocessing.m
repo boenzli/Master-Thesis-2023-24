@@ -6,7 +6,7 @@
 clc
 clear all
 close all
-
+% Matlab file to run OpenSees analysis and post process the data:
 %% Adapt the analysis data
 
 % Material properties
@@ -27,22 +27,19 @@ betaTremuri = 0.8;    % factor for the post peak behaviour of walls without OOP 
 
 % Rayleigh damping parameters ("damping" frunction written by Dr. Igor Tomic)
 dampingpercentage=0.05;
-[alpha,beta_matlab]= damping(0.1141,0.0909,dampingpercentage);
+[alpha,beta_matlab]= damping(0.1144,0.0919,dampingpercentage);
 
 % Factor of the dynamic analysis
-EQfactor = [0.5 1];
-
-%Pushover analysis
-maxDispl = 0.05;
+EQfactor = [0.5 1.0 1.5 2.0];
 
 % Direction of analysis
-EQdirection = [1];
+EQdirection = [1 2];
 for ii=1:1:length(EQfactor)
     for iii=1:1:length(EQdirection)
 
         %% options
         %%%% change this to the folder where you have Opensees.exe and Macroelement3d.ddl
-        analysisFolder = 'C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel';
+        analysisFolder = 'C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model';
         cd (analysisFolder)
 
         % file containing all information of the model (must contain the model in a variable
@@ -62,12 +59,9 @@ for ii=1:1:length(EQfactor)
 
         %% Define where the results should be stored
         XY=["X" "Y"];
-        % First definition of "Results" for unidirectional ground
-        % motion, second definition for bidirectional ground motion.
-        % Adapt as needed.
-        
-        % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel\results_EQdir",XY(EQdirection(iii)),"_EQfac",num2str(EQfactor(ii)));
-        Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel\results_EQdirYX_EQfac",num2str(EQfactor(ii)));
+        Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdir",XY(EQdirection(iii)),"_EQfac",num2str(EQfactor(ii)));
+        % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdirXY_EQfac",num2str(EQfactor(ii)));
+        % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdirYX_EQfac",num2str(EQfactor(ii)));
         
         % Check if the results folder exists already
         if ~exist(Results, 'dir')
@@ -196,7 +190,7 @@ for ii=1:1:length(EQfactor)
 
         fprintf('Total analysis time: %.2f s\n', elapsedTime);
 
-        %% Read analysis (Loop and "readAnalysis" function written by Dr. Igor Tomic)
+        %% Read analysis
         
         for kAnalysis=2:length(inputFiles)-1
 
@@ -250,11 +244,6 @@ for ii=1:1:length(EQfactor)
 
 
         %% Save results
-        % % Plots model shape
-        % DriftType='D'
-        % DriftLimit=1
-        % plotAnalysis(model, analysis(3),DriftType,DriftLimit)
-        % title ("Modal shapes");
         % % Plots flexural drift
         % DriftType='F';
         % DriftLimit=0.012;
@@ -262,15 +251,13 @@ for ii=1:1:length(EQfactor)
         % title("Flexural drifts");
         
         cd(Results);
-
-        % Save the results (first version for unidirectional ground motion,
-        % second version for bidirectional ground motion)
-        fname=sprintf(strcat("ParishHouse_EQdirYX_EQfac", num2str(EQfactor(ii)),".mat"));
-        % fname=sprintf(strcat("ParishHouse_EQdir", XY(EQdirection(iii)), "_EQfac", num2str(EQfactor(ii)),".mat"));
+        % fname=sprintf(strcat("ParishHouse_EQdirXY_EQfac", num2str(EQfactor(ii)),".mat"));
+        % fname=sprintf(strcat("ParishHouse_EQdirYX_EQfac", num2str(EQfactor(ii)),".mat"));
+        fname=sprintf(strcat("ParishHouse_EQdir", XY(EQdirection(iii)), "_EQfac", num2str(EQfactor(ii)),".mat"));
         
         save(fname,'-v7.3');
 
-        cd ("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel")
+        cd ("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model")
 
 
     end

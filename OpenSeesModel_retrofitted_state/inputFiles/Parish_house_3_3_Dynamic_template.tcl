@@ -25,8 +25,8 @@ set factor
 timeSeries Path 1  -dt $dt_GM  -filePath $groundMotionPath1  -factor $factor
 timeSeries Path 2  -dt $dt_GM  -filePath $groundMotionPath2  -factor $factor
 #                           $patternTag $dir -accel $tsTag <-vel0 $vel0> <-fact $cFactor>
-pattern UniformExcitation   3    2   -accel 1
-pattern UniformExcitation   4    1   -accel 2 
+pattern UniformExcitation   3    1   -accel 1
+pattern UniformExcitation   4    2   -accel 2 
 
 # Define damping model
 # ----------------------------------------------

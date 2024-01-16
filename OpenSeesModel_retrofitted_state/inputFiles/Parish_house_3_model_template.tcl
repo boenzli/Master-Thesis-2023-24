@@ -514,17 +514,17 @@ element	elasticBeamColumn	316	43	44	300	100
 #uniaxialMaterial	Steel01	$matTag	$Fy		$E0				$b
 uniaxialMaterial	Steel01	1	355000000	210000000000	0
 #$truss	$eleTag	$nodeI	$nodeJ	$A	$matTag	$-cMass	$cFlag
-element	truss	401	35	89	0.000079	1	-cMass	1
-element	truss	402	34	46	0.000157	1	-cMass	1
-element	truss	403	33	47	0.000118	1	-cMass	1
-element	truss	404	32	48	0.000118	1	-cMass	1
-element	truss	405	75	74	0.000079	1	-cMass	1
-element	truss	406	41	94	0.000079	1	-cMass	1
-element	truss	407	62	63	0.000079	1	-cMass	1
-element	truss	408	96	23	0.000079	1	-cMass	1
-element	truss	409	53	22	0.000079	1	-cMass	1
-element	truss	410	101	11	0.000079	1	-cMass	1
-element	truss	411	73	12	0.000079	1	-cMass	1
+element	truss	401	35	89	0.000254	1	-cMass	1
+element	truss	402	34	46	0.000509	1	-cMass	1
+element	truss	403	33	47	0.000382	1	-cMass	1
+element	truss	404	32	48	0.000382	1	-cMass	1
+element	truss	405	75	74	0.000254	1	-cMass	1
+element	truss	406	41	94	0.000254	1	-cMass	1
+element	truss	407	62	63	0.000254	1	-cMass	1
+element	truss	408	96	23	0.000254	1	-cMass	1
+element	truss	409	53	22	0.000254	1	-cMass	1
+element	truss	410	101	11	0.000509	1	-cMass	1
+element	truss	411	73	12	0.000509	1	-cMass	1
 # END Steel tie elements-------------------------------------------------------------------------------
 
 #CONSTRAINTS --------------------------------------------------------- 

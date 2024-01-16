@@ -30,7 +30,7 @@ dampingpercentage=0.05;
 [alpha,beta_matlab]= damping(0.1144,0.0919,dampingpercentage);
 
 % Factor of the dynamic analysis
-EQfactor = [0.6 1.2];
+EQfactor = [0.5 1.0 1.5 2.0];
 
 % Direction of analysis
 EQdirection = [1 2];

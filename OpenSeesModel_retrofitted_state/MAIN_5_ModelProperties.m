@@ -6,10 +6,6 @@
 clc
 clear all
 close all
-%% Matlab script to establish basic properties for postprocessing
-% Author: Aline Bönzli
-% Date: 12.12.2023
-% Project: Master Thesis, Parish House St. Lawrence church Petrinja
 
 analysisFolder = 'C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model';
 cd (analysisFolder)

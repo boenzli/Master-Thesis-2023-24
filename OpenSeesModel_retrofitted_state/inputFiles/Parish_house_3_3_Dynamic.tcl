@@ -25,16 +25,16 @@ set factor 1
 timeSeries Path 1  -dt $dt_GM  -filePath $groundMotionPath1  -factor $factor 
 timeSeries Path 2  -dt $dt_GM  -filePath $groundMotionPath2  -factor $factor 
 #                           $patternTag $dir -accel $tsTag <-vel0 $vel0> <-fact $cFactor> 
-pattern UniformExcitation   3    2   -accel 1 
-pattern UniformExcitation   4    1   -accel 2  
+pattern UniformExcitation   3    1   -accel 1 
+pattern UniformExcitation   4    2   -accel 2  
  
 # Define damping model 
 # ---------------------------------------------- 
 set betaKinitial    1.0; 
 set betaKcurrent    0.0; 
 set betaKcommitted  0.0; 
-set beta_matlab  0.00080522 
-set alpha 3.065 
+set beta_matlab  0.00080159 
+set alpha 3.0815 
  
 # User defined. Alpha (mass proportional) 0.922265, beta (initial stiffness proprotional) 0.002315 
 rayleigh     $alpha      [expr $betaKcurrent* 1.0]     [expr $betaKinitial* $beta_matlab]    [expr $betaKcommitted* 1.0]; 

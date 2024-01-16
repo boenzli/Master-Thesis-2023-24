@@ -17,11 +17,12 @@ load("modelParameters.mat")
 % acceleration in Y direction, YX for EW acceleration in X direction and NS
 % acceleration in Y direction.
 
-EQdir = ["X" "Y" "XY" "YX"]; % Capital X or Y  to specify the direction
+EQdir = ["XY"]; % Capital X or Y  to specify the direction
 EQfac = [0.5 1.0]; % Needs to correspond to one of the analysis that were performed
 for a = 1:1:length(EQdir)
     for ii = 1:1:length(EQfac)
         close all
+        ii_in=ii;
         try
             CurrentAnalysis = strcat("This is the analysis with ground acceleration in direction ",EQdir(a)," and factor ",num2str(EQfac(ii)))
             %------------------------------------------------------------------
@@ -36,7 +37,7 @@ for a = 1:1:length(EQdir)
             workspace = strcat("ParishHouse_EQdir", EQdir(a), "_EQfac", num2str(EQfac(ii)),".mat");
             load(workspace);
             load("modelParameters.mat")
-
+            ii=ii_in;
             %% Calculate max drifts
             
             % When activated, this code gives graphs showing the maximum
@@ -153,15 +154,16 @@ for a = 1:1:length(EQdir)
             minBaseShearX=min(BaseShearX)
             minBaseShearY=min(BaseShearY)
 
+
+
             % PLOT ROOF DISPLACEMENT - BASE SHEAR
 
             figure;
             plot (Rdx,BaseShearX);
             % title ("Average roof displacement to total base shear x-direction");
-            xlabel("Average roof displacement in x-direction [mm]");
-            ylabel ("Total Base Shear x-direction [kN]");
-
-            fileName1 = 'BaseShearVSRoofDispX.png'; % Specify the filename for saving the PNG file
+            xlabel("\delta_{mean,X}  [mm]");
+            ylabel ("V_{d,tot,X} [kN]");
+            fileName1 = strcat('BaseShearVSRoofDispX_',num2str(EQfac(ii)),EQdir(a),'.png'); % Specify the filename for saving the PNG file
             baseShearXPath = fullfile(Results, fileName1); % Combine the location and filename
             saveas(gcf, baseShearXPath, 'png'); % Save the figure as a PNG file
 
@@ -169,10 +171,10 @@ for a = 1:1:length(EQdir)
             figure;
             plot (Rdy,BaseShearY);
             % title ("Average roof displacement to total base shear y-direction");
-            xlabel("Average roof displacement in y-direction [mm]");
-            ylabel ("Total Base Shear y-direction [kN]");
+            xlabel("\delta_{mean,Y}  [mm]");
+            ylabel ("V_{d,tot,Y} [kN]");
 
-            fileName2 = 'BaseShearVSRoofDispY.png'; % Specify the filename for saving the PNG file
+            fileName2 = strcat('BaseShearVSRoofDispY_',num2str(EQfac(ii)),EQdir(a),'.png'); % Specify the filename for saving the PNG file
             baseShearYPath = fullfile(Results, fileName2); % Combine the location and filename
             saveas(gcf, baseShearYPath, 'png'); % Save the figure as a PNG file
 
@@ -209,10 +211,10 @@ for a = 1:1:length(EQdir)
             figure;
             plot (Rdx_max,BaseShearX);
             % title ("Maximum roof displacement to total base shear x-direction");
-            xlabel("Maximum roof displacement in x-direction [mm]");
-            ylabel ("Total Base Shear x-direction [kN]");
+            xlabel("\delta_{max,X}  [mm]");
+            ylabel ("V_{d,tot,X} [kN]");
 
-            fileName1 = 'BaseShearVSMaxRoofDispX.png'; % Specify the filename for saving the PNG file
+            fileName1 = strcat('BaseShearVSMaxRoofDispX_',num2str(EQfac(ii)),EQdir(a),'.png'); % Specify the filename for saving the PNG file
             baseShearXPath = fullfile(Results, fileName1); % Combine the location and filename
             saveas(gcf, baseShearXPath, 'png'); % Save the figure as a PNG file
 
@@ -220,10 +222,10 @@ for a = 1:1:length(EQdir)
             figure;
             plot (Rdy_max,BaseShearY);
             % title ("Maximum roof displacement to total base shear y-direction");
-            xlabel("Maximum roof displacement in y-direction [mm]");
-            ylabel ("Total Base Shear y-direction [kN]");
+            xlabel("\delta_{max,Y}  [mm]");
+            ylabel ("V_{d,tot,Y} [kN]");
 
-            fileName2 = 'BaseShearVSMaxRoofDispY.png'; % Specify the filename for saving the PNG file
+            fileName2 = strcat('BaseShearVSMaxRoofDispY_',num2str(EQfac(ii)),EQdir(a),'.png'); % Specify the filename for saving the PNG file
             baseShearYPath = fullfile(Results, fileName2); % Combine the location and filename
             saveas(gcf, baseShearYPath, 'png'); % Save the figure as a PNG file
         catch

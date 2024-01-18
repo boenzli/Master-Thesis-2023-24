@@ -6,8 +6,8 @@
 clc
 clear all
 close all
-% Matlab file to run OpenSees analysis and post process the data:
-%% Adapt the analysis data
+
+%% Adapt and intorduce the analysis data
 
 % Material properties
 E = 1.5e9;            % Youngs modulus [Pa]
@@ -23,7 +23,7 @@ dropDrift = 0.0065;   % Drift at 20% force capacity loss [-]
 muR = mus;            % Residual friction coefficient [-]
 driftF = 0.0086*1.15; % Drift at loss of lateral force capacity, flexural failure [-]
 driftS = 0.0058*1.15; % Drift at loss of lateral force capacity, shear failure [-]
-betaTremuri = 0.8;    % factor for the post peak behaviour of walls without OOP [-]
+betaTremuri = 0.8;    % Factor for the post peak behaviour of walls without OOP [-]
 
 % Rayleigh damping parameters ("damping" frunction written by Dr. Igor Tomic)
 dampingpercentage=0.05;
@@ -33,6 +33,8 @@ dampingpercentage=0.05;
 EQfactor = [0.5 1.0 1.5 2.0];
 
 % Direction of analysis
+% 1 = X-direction and 2 = Y-direction, for bi-directional analysis choose 1
+% and adapte the "Parish_house_3_3_Dynamic_template.tcl" file
 EQdirection = [1 2];
 for ii=1:1:length(EQfactor)
     for iii=1:1:length(EQdirection)
@@ -59,6 +61,9 @@ for ii=1:1:length(EQfactor)
 
         %% Define where the results should be stored
         XY=["X" "Y"];
+        % For bi-directional analysis choose the corresponding link
+        % (adapted to your computer) and also change the input file called
+        % "Parish_house_3_3_Dynamic_template.tcl"
         Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdir",XY(EQdirection(iii)),"_EQfac",num2str(EQfactor(ii)));
         % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdirXY_EQfac",num2str(EQfactor(ii)));
         % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdirYX_EQfac",num2str(EQfactor(ii)));
@@ -251,6 +256,10 @@ for ii=1:1:length(EQfactor)
         % title("Flexural drifts");
         
         cd(Results);
+
+        % For bi-directional analysis choose the corresponding link
+        % (adapted to your computer) and also change the input file called
+        % "Parish_house_3_3_Dynamic_template.tcl"
         % fname=sprintf(strcat("ParishHouse_EQdirXY_EQfac", num2str(EQfactor(ii)),".mat"));
         % fname=sprintf(strcat("ParishHouse_EQdirYX_EQfac", num2str(EQfactor(ii)),".mat"));
         fname=sprintf(strcat("ParishHouse_EQdir", XY(EQdirection(iii)), "_EQfac", num2str(EQfactor(ii)),".mat"));

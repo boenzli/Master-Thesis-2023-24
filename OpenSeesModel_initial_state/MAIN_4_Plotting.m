@@ -15,8 +15,8 @@ load("modelParameters.mat")
 % acceleration in Y direction, YX for EW acceleration in X direction and NS
 % acceleration in Y direction.
 
-EQdir = ["Y"]; % Capital X or Y  to specify the direction
-EQfac = [0.6 1.2]; % Needs to correspond to one of the analysis that were performed
+EQdir = ["X" "Y" "XY" "YX"]; % Capital X or Y  to specify the direction, XY stands for NS-acceleration in X-direction and EW-acceleration in Y-direction and YX is the inverse.
+EQfac = [0.5 1.0 1.5 2.0]; % Needs to correspond to one of the analysis that were performed
 for a = 1:1:length(EQdir)
     for ii = 1:1:length(EQfac)
         close all

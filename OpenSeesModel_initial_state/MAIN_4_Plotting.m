@@ -24,6 +24,8 @@ for a = 1:1:length(EQdir)
         try
             CurrentAnalysis = strcat("This is the analysis with ground acceleration in direction ",EQdir(a)," and factor ",num2str(EQfac(ii)))
             %------------------------------------------------------------------
+            % Define the location where the results from the dynamic
+            % analysis are stored.
             analysisFolder = 'C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model';
             cd (analysisFolder)
             Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\08_OpenSees_Model\results_EQdir",EQdir(a),"_EQfac",num2str(EQfac(ii)));

@@ -7,7 +7,7 @@ clc
 clear all
 close all
 
-%% Adapt the analysis data
+%% Adapt and introduce the analysis data
 
 % Material properties
 E = 1.5e9;            % Youngs modulus [Pa]
@@ -33,7 +33,9 @@ dampingpercentage=0.05;
 EQfactor = [0.5 1];
 
 % Direction of analysis
-EQdirection = [1];
+% 1 = X-direction and 2 = Y-direction, for bi-directional analysis choose 1
+% and adapte the "Parish_house_3_3_Dynamic_template.tcl" file
+EQdirection = [1 2];
 for ii=1:1:length(EQfactor)
     for iii=1:1:length(EQdirection)
 
@@ -59,10 +61,9 @@ for ii=1:1:length(EQfactor)
 
         %% Define where the results should be stored
         XY=["X" "Y"];
-        % First definition of "Results" for unidirectional ground
-        % motion, second definition for bidirectional ground motion.
-        % Adapt as needed.
-        
+        % For bi-directional analysis choose the corresponding link
+        % (adapted to your computer) and also change the input file called
+        % "Parish_house_3_3_Dynamic_template.tcl"
         Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel\results_EQdir",XY(EQdirection(iii)),"_EQfac",num2str(EQfactor(ii)));
         % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel\results_EQdirXY_EQfac",num2str(EQfactor(ii)));
         % Results = strcat("C:\Users\aline\OneDrive\Dokumente\EPFL\12_Master_Thesis\13_RetrofittedModel\results_EQdirYX_EQfac",num2str(EQfactor(ii)));
@@ -261,8 +262,9 @@ for ii=1:1:length(EQfactor)
         
         cd(Results);
 
-        % Save the results (first version for unidirectional ground motion,
-        % second version for bidirectional ground motion)
+        % For bi-directional analysis choose the corresponding link
+        % (adapted to your computer) and also change the input file called
+        % "Parish_house_3_3_Dynamic_template.tcl"
         fname=sprintf(strcat("ParishHouse_EQdirXY_EQfac", num2str(EQfactor(ii)),".mat"));
         % fname=sprintf(strcat("ParishHouse_EQdirYX_EQfac", num2str(EQfactor(ii)),".mat"));
         % fname=sprintf(strcat("ParishHouse_EQdir", XY(EQdirection(iii)), "_EQfac", num2str(EQfactor(ii)),".mat"));
